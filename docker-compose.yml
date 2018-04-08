@@ -3,7 +3,7 @@ services:
   wordpress:
     image: wordpress:latest # https://hub.docker.com/_/wordpress/
     ports:
-      - 127.0.0.1:80:80 # change ip if required
+      - 80:80 # change port for every deployment. Get nginx config to look here
     volumes:
       - ./config/php.conf.uploads.ini:/usr/local/etc/php/conf.d/uploads.ini
       - ./wp-app:/var/www/html # Full wordpress project
@@ -19,9 +19,9 @@ services:
     networks:
       - wordpress-network
   db:
-    image: mysql:latest # https://hub.docker.com/_/mysql/ - or mariadb https://hub.docker.com/_/mariadb
+    image: mysql:latest
     ports:
-      - 127.0.0.1:3306:3306 # change ip if required
+      - 3306:3306 # change port for every new deployment
     volumes:
       - ./wp-data:/docker-entrypoint-initdb.d
       - ./mysql:/var/lib/mysql
